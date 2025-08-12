@@ -2,6 +2,7 @@ package com.curso.cursado2.controlador;
 
 import com.curso.cursado2.modelo.Cliente;
 import com.curso.cursado2.servicio.ClienteServicio;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
