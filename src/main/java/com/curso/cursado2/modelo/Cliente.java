@@ -7,7 +7,12 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotBlank(message = "El nombre no puede estar vacío")
+    @Size(max=50, message = "El nombre no puede tener más de 50 caracteres")
     private String nombre;
+    @NotBlank(message = "El email no puede estar vacío")
+    @Email(message = "El email debe tener un formato válido")
     @Column(unique = true)
     private String email;
 
