@@ -1,5 +1,6 @@
 package com.curso.cursado2.controlador;
 
+import com.curso.cursado2.excepciones.ApiResponse;
 import com.curso.cursado2.modelo.Cliente;
 import com.curso.cursado2.servicio.ClienteServicio;
 import jakarta.validation.Valid;
@@ -27,12 +28,9 @@ public class ClienteController {
         return clienteServicio.listarClientes();
     }
     @PostMapping
-    public ResponseEntity<?> crearCliente(@Valid @RequestBody Cliente cliente) {
-        try{
-            return ResponseEntity.ok(clienteServicio.guardarCliente(cliente));
-        }catch(DataIntegrityViolationException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body("Error: El email ya está en uso.");
-        }
+    public ResponseEntity<ApiResponse<Cliente>> crearCliente(@Valid @RequestBody Cliente cliente) {
+        Cliente nuevoCliente = clienteServicio.guardarCliente(cliente);
+        ApiResponse<Cliente> respuesta = new ApiResponse<>(true, "Cliente creado exitosamente", nuevoCliente);
+        return ResponseEntity.ok(respuesta);
     }
 }
